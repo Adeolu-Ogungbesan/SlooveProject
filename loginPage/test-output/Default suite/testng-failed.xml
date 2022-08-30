@@ -5,8 +5,8 @@
     <classes>
       <class name="taskPage.TestCase_002_1">
         <methods>
+          <include name="CreateTaskFoAPastDateTC0024"/>
           <include name="taskWithoutDescriptionTC0023"/>
-          <include name="LinkShouldRedirectToTaskPageTC0021"/>
           <include name="setup"/>
         </methods>
       </class> <!-- taskPage.TestCase_002_1 -->

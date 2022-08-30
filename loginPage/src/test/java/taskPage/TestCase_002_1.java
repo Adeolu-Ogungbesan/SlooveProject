@@ -3,6 +3,7 @@ package taskPage;
 import java.util.Stack;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -49,18 +50,22 @@ public void taskWithoutDescriptionTC0023() {
 	String required = tp.RequiredTxt();
 	Assert.assertEquals(required, "Required");
 }
+@Test(priority = 4)
 public void CreateTaskFoAPastDateTC0024() {
 	tp = new TaskPage(page);
 	tp.CreateTaskForAPastDate("TaskToBeDone");
 	
 }
+@Test(priority = 5)
 public void cancelWhileCreatingANewTAskTC0025() {
 	tp = new TaskPage(page);
 	tp.cancelButtonWhenCreatingATask();
 }
+@Test(priority = 5)
 public void editTaskTC0031() {
 tp = new TaskPage(page);
 tp.editATAsk();
 }
+
 
 }
