@@ -1,6 +1,8 @@
 package loginPageTest;
 
+import java.nio.file.Paths;
 
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import com.microsoft.playwright.Browser;
@@ -8,28 +10,22 @@ import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.BrowserType.LaunchOptions;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Page.WaitForURLOptions;
 import com.microsoft.playwright.Playwright;
-import com.microsoft.playwright.Response;
-import com.microsoft.playwright.options.LoadState;
+import com.microsoft.playwright.Tracing;
 
 public class BaseClass {
 
-	//private static final String public = null;
-	//private static final String Chromium = null;
 	
 	// TODO Auto-generated method stub
 
 	static Playwright playwright = null;
 	static BrowserContext browserContext = null;
-	static Browser browser;
+	static Browser browser = null;
 static Page page = null;
-
-	public static Page initBrowser(String browserName) throws InterruptedException {
-		
-		
-		System.out.println("Browser name is :"+browserName);
-		playwright= Playwright.create();
+@BeforeClass
+	public static Page initBrowser(String browserName) {
+	System.out.println("Browser name is : " +browserName);	   
+	playwright = Playwright.create();
 		    switch (browserName.toLowerCase()) {
 			case "chromium":
 			browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
@@ -40,28 +36,32 @@ static Page page = null;
 			case "safari":
 				browser = playwright.webkit().launch(new BrowserType.LaunchOptions().setHeadless(false));
 				break;
-			case "Chrome":
+			case "chrome":
 				browser = playwright.chromium().launch(new LaunchOptions().setChannel("chrome").setHeadless(false));
 				break;
 
 			default:
 				System.out.println("Please pass the right browser name...");
 				break;
-		    }
+			}
+		    browserContext = browser.newContext();
+		    page = browserContext.newPage();
+			
+			/*
+			 * browserContext.tracing().start(new Tracing.StartOptions()
+			 * .setScreenshots(true) .setSnapshots(true) .setSources(true));
+			 */	
+		    page.setDefaultNavigationTimeout(100000);
+		    page.navigate("https://stage.outreach.sloovi.com/login");
 
-		    	 browserContext = browser.newContext();
-				    page = browserContext.newPage();
-				  //page.click("button") # click triggers navigation.
-					 page.setDefaultNavigationTimeout(1000000);
+		    return page;
+		    }}
+		
 
-				   page.navigate("https://stage.outreach.sloovi.com/login");
-
-				    return page;
-				    	
-					/*
-					 * } public void BasePage() { this.page=page; } public String
-					 * getLoginPageTitle() { return page.title(); } public String GetLoginPageUrl()
-					 * { return page.url();
-					 */}
-		    }
-	 
+/*
+ * //@AfterClass
+ * 
+ * public void TearDown() { browserContext.tracing().stop(new
+ * Tracing.StopOptions()
+ * .setPath(Paths.get("C:\\Users\\hp\\git\\Sloove\\loginPage\\trace.zip"))); } }
+ */

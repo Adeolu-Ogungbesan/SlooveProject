@@ -16,7 +16,7 @@ public class TestCase_001_1  {
 	@BeforeTest
 	public void setup() throws InterruptedException {
 		bc = new BaseClass();
-		page =BaseClass.initBrowser("chromium");
+		page =BaseClass.initBrowser("Chromium");
 		lp = new LoginPage(page);
 	}
 	@Test (priority = 1)

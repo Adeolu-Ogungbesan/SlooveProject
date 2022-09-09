@@ -11,7 +11,7 @@ String FollowupTexT = "[data-test-id=\"task_0af24d60215c4d568355eecf554afcba\"] 
 String newTaskBtn = "[data-testid=\'add-task\']";
 String TaskDescriptionTXTBox = "[placeholder=\"Description of task\"]";
 String CallenderDropdown = "[placeholder=\"MM\\/DD\\/YYYY\"]";
-String TaskDate = "[aria-label=\"Wednesday\\, August 31\\, 2022\"]";
+//String TaskDate = "[aria-label=\\\"Thursday\\\\, September 15\\\\, 2022\\\"]";
 String TimeDropDown = "[placeholder=\"Time\"]";
 String TaskTime = "text=3:00am";
 String assignUserTxtBox = "input[name=\"assigned_user\"]";
@@ -19,7 +19,7 @@ String assigneeName = "text=Sundar Pichai";
 String cancelBtn = "text=Cancel";
 String SaveBtn = "text=Save";
 String requiredMessage = "text=Required";
-String pastDate ="[aria-label=\"Tuesday\\, August 2\\, 2022\"]";
+String pastDate ="[aria-label=\\\"Friday\\\\, September 2\\\\, 2022\\\"]";
 String taskName = "text=New Task";
 public TaskPage(Page page) {
 	this.page = page;
@@ -39,8 +39,8 @@ public void CreateTask(String tastTitle) {
 	page.click(newTaskBtn);
 	page.fill(TaskDescriptionTXTBox, " ");
 	page.fill(TaskDescriptionTXTBox, "tastTitle");
-	page.click(CallenderDropdown);
-	page.click(TaskDate);
+	page.fill(CallenderDropdown, "09/15/2022");
+	//page.click(TaskDate);
 	page.click(TimeDropDown);
 	page.click(TaskTime);
 	page.click(assignUserTxtBox);
@@ -51,8 +51,8 @@ public boolean CreateTaskForAPastDate(String tastTitle) {
 	page.click(newTaskBtn);
 	page.fill(TaskDescriptionTXTBox, " ");
 	page.fill(TaskDescriptionTXTBox, "tastTitle");
-	page.click(CallenderDropdown);
-	page.click(pastDate);
+	page.fill(CallenderDropdown, "09/01/2022");
+	//page.click(pastDate);
 	page.click(TimeDropDown);
 	page.click(TaskTime);
 	page.click(assignUserTxtBox);
@@ -66,8 +66,8 @@ public boolean CreateTaskForAPastDate(String tastTitle) {
 public void CreateTaskWithoutDescritpption() {
 	page.click(newTaskBtn);
 	page.fill(TaskDescriptionTXTBox, " ");
-	page.click(CallenderDropdown);
-	page.click(TaskDate);
+	page.fill(CallenderDropdown, "09/15/2022");
+	//page.click(TaskDate);
 	page.click(TimeDropDown);
 	page.click(TaskTime);
 	page.click(assignUserTxtBox);
@@ -83,7 +83,7 @@ public void cancelButtonWhenCreatingATask() {
 	page.fill(TaskDescriptionTXTBox, " ");
 	page.fill(TaskDescriptionTXTBox, "tastTitle");
 	page.click(CallenderDropdown);
-	page.click(TaskDate);
+	//page.click(TaskDate);
 	page.click(TimeDropDown);
 	page.click(TaskTime);
 	page.click(assignUserTxtBox);
